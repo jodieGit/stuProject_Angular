@@ -1,0 +1,18 @@
+<!doctype html>
+<!--使用angular框架，必须在html后面加上ng-app标识-->
+<html ng-app>
+    <head>
+        <!--引入angular脚本-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    </head>
+    <body>
+        <!--以下实例注意事项：1.data-ng-model的使用；2.{{}}的使用；3.data-ng-model和{{}}命名的统一性-->
+        <!--现象：实时更新-->
+        <div>
+            <label>Name:</label>
+            <input type="text" data-ng-model="yourName" placeholder="Enter a name here">
+            <hr>
+            <h1>Hello {{yourName}}!</h1>
+        </div>
+    </body>
+</html>

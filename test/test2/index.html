@@ -1,0 +1,30 @@
+<!doctype html>
+<!--todoApp与todo.js里定义的mudule名相对应-->
+<html ng-app="todoApp">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="todo.js"></script>
+        <link rel="stylesheet" href="todo.css">
+    </head>
+    <body>
+        <h2>Todo</h2>
+        <!--定义对应的controller，与todo.js里定义的controller相对应-->
+        <div ng-controller="TodoListController as todoList">
+            <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
+            <!--data-ng-click触发click事件，调用todo.js里定义的archive方法-->
+            [<a href="" data-ng-click="todoList.archive()">archive</a>]
+            <ul class="unstyled">
+                <!--data-ng-repeat相当于for循环语句，data-ng-model定于了获取js里模板的值-->
+                <li data-ng-repeat="todo in todoList.todos">
+                    <input type="checkbox" data-ng-model="todo.done">
+                    <span class="done-{{todo.done}}">{{todo.text}}</span>
+                </li>
+            </ul>
+            <!--ng-submit用于表单提交，直接调用todo.js中的对应方法-->
+            <form ng-submit="todoList.addTodo()">
+                <input type="text" data-ng-model="todoList.todoText" size="30" placeholder="add new todo here">
+                <input data-ng-model="" class="btn-primary" type="submit" value="add">
+            </form>
+        </div>
+    </body>
+</html>
