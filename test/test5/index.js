@@ -43,3 +43,4 @@ angular.module("myApp",[])
 function($scope){
     $scope.name="Ari"
 });
+

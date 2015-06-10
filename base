@@ -58,3 +58,34 @@ AngularJS作用域：
 
 Angulat控制器：是一个函数，用来向视图的作用域中添加额外的功能。我们用它来给作用域对象设置初始状态，
     并添加自定义行为。
+    为防止污染全局命名空间。更合理的方式是创建一个模块，然后在模块中创建控制器。
+    AngularJS同其他Javascript框架最主要的一个区别就是，控制器并不适合在执行DOM操作、格式化或
+    数据操作，以及除存储数据模型之外的状态维护操作。它只是视图和$scope之间的桥梁。
+
+Angular表达式：用{{}}符号将一个变量绑定到$scope上的写法本质上及时一个表达式：{{expression}}.
+    表达式和eval(javascript)非常相似，但是由于表达式由AngularJS来处理，他们有以下显著不同的特质：
+    1.所有的表达式都在其所属的作用域内部执行，并有访问本地$scope的权限；
+    2.如果表达式发生了TyprError和ReferenceErro并不会抛出异常；
+    3.不允许使用任何流程控制功能（条件控制）
+    4.可以接受过滤器和过滤器链。
+
+    解析AngularJS表达式
+        尽管AngularJS会在运行$digest循环的过程中自动解析表达式，但有时手动解析表达式也是非常有用的。
+        AngualrJS通过$parse这个内部服务来进行表达式的运算，这个服务器能够访问当前所处的作用域。这个
+        过程允许我们访问定义在$scope上的原始Javascript数据和函数。
+        将$parse服务注入到控制器中，然后调用它可以实现手动解析表达式。
+    插值字符串：
+        要在字符串模板中做插值操作，需要在你的对象中注入$interpolate服务，eg:
+        angualt.module('myApp',[])
+            .controller('MyController',function($scope,$interpolate){
+                //我们同事有用访问$scope和$interpolate服务的权限
+            })
+
+        $interpolate服务是一个可以接受三个参数的函数，其中第一个参数是必需的。
+        text(字符串):一个包含字符插值标记的字符串
+        mustHaveExpression(布尔值)：如果将这个参数设为true,当传入的字符串中不含有表达式会返回
+            null.
+        trustedContext(字符串)：AngularJS会对已经进行过字符插值操作的字符串通过
+            $sec.getTrusted()方法进行严格的上下文转义。
+
+        $interpolate服务器返回一个参数，用来在特定的上下文中运算表达式。
