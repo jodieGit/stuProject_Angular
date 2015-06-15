@@ -22,12 +22,15 @@
     <!--</div>-->
 
     <!--3-->
-    <div id="emailEditor">
-        <input data-ng-model="to" type="email" placeholder="Recipient"/>
-        <textarea data-ng-model="emailBody"></textarea>
-    </div>
-    <div id="emailPreview">
-        <pre>__previewText</pre>
+    <div id="emailEditor" ng-controller="MyController">
+        <input ng-model="to"
+               type="email"
+               placeholder="Recipient" />
+        <textarea ng-model="emailBody"></textarea>
+
+        <div id="emailPreview">
+            <pre>__ previewText __</pre>
+        </div>
     </div>
 </body>
 </html>
