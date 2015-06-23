@@ -195,5 +195,55 @@ Angular过滤器：过滤器用来格式化需要展示给用户的数据。
 
     9.uppercase:可以将字符串转换为大写形式
 
-自定义
+自定义过滤器：
+    eg:angular.module('myApp.filters',[])
+        .filter('capitalize',function(){
+            return function(input){
+            //input是我们传入的字符串
+                if(input){
+                    return input[0].toUpperCase()+input.slice(1);
+                }
+            }
+            }
+        });
+
+        {{'ginger loves dog treats'|lowercase|capitalize}}
+
+
+表单验证：要使用表单验证，首先要确保表单有一个name属性。
+    所有输入字段都可以使用基本的验证，比如最大、最小长度等，这些功能是由新的HTML5表单属性提供的。
+    如果想要屏蔽浏览器对表单的默认验证行为，可以在表单元素上添加novalidate标记。
+    1.必填项：只要在输入字段元素上添加HTML5标记required即可。
+    2.最小长度：验证表单输入的文本长度是否大于某个最小值，再输入字段上使用AngularJS指令ng-minleng="number"
+    3.最大长度：验证表单输入的文本长度是否大于某个最小值，在输入字段上使用AngularJS指令ng-maxlength="{number}"
+    4.模式匹配:使用ng-pattern="/PATTERN/"来确保输入能匹配指定的正则表达式。
+    5.电子邮件：验证输入内容是否是电子邮件，只要下面这样将input的类型设置为email即可。
+        <input type="email" name="email" ng-model="user.email"/>
+    6.数字：验证输入的内容是否是数字，将input的类型设置为number
+    7.URL:验证输入内容是否为URL，将Input的类型设置为url
+    8.自定义验证：
+    9.表单中控制变量：
+        9-1:可以使用下面格式访问这些属性：formName.inputFieldName.property
+        9-2:未修改的表单：这是一个布尔属性，用来判断用户是否修改了表单。如果修改了，值为true;如果修改过值，
+        值为false：formName.inputFieldName.$pristine
+        9-3:修改过的表单：只要用户修改过表单，无论输入是否通过验证，该值都返回true:formName.inputFieldName.$dirty
+        9-4:合法的表单：这个布尔类型的属性用来判断表单的内容是否合法。如果当前表单合法，下面属性的值就是true:
+        fromName.inputFieldName.$valid
+        9-5:不合法的表单：这个布尔值属性用来判断表单的内容是否合法。如果当前表单内容是不合法的，下面属性的值为true:
+        formName.inputFieldName.$invalid
+        9-6:错误：这是AngularJS提供的另外一个非常重要的属性：$error对象。它包含当前表单的所有验证内容，以及他们是否合法
+        的信息，用下面的语法访问这个属性：formName.inputFieldName.$error,如果验证失败，这个属性的值为true;如果值为
+        false，说明输入字段的值通过了验证。
+
+    10.一些有用的css样式：
+        .ng-pristine{}
+        .ng-dirty{}
+        .ng-valid{}
+        .ng-invalid{}
+
+
+
+
+
+
 
